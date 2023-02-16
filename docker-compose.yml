@@ -18,3 +18,15 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
+
+  database_elearning:
+    image: postgres:13.5
+    container_name: forest_database_elearning
+    ports:
+      - "5440:5432"
+    environment:
+      - POSTGRES_DB=elearning
+      - POSTGRES_USER=forest
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - ./postgres-data/:/var/lib/postgresql/data
