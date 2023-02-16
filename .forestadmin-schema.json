@@ -136,7 +136,20 @@
       "validations": []
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "test",
+      "type": "global",
+      "baseUrl": null,
+      "endpoint": "/forest/actions/test",
+      "httpMethod": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }]
   }, {
     "name": "discussions",
     "nameOld": "discussions",
@@ -713,7 +726,7 @@
     "stack": {
       "database_type": "postgres",
       "engine": "nodejs",
-      "engine_version": "16.14.0",
+      "engine_version": "19.6.0",
       "orm_version": "5.15.2"
     }
   }
