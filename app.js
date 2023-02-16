@@ -1,3 +1,4 @@
+console.log('toto');
 const express = require('express');
 const requireAll = require('require-all');
 const path = require('path');
