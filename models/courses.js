@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
+    price: {
+      type: DataTypes.INTEGER,
+    },
   }, {
     tableName: 'courses',
     timestamps: false,
@@ -33,12 +36,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       as: 'enrollments',
     });
-    Courses.hasMany(models.lessons, {
+    Courses.hasMany(models.discussions, {
       foreignKey: {
         name: 'courseIdKey',
         field: 'course_id',
       },
-      as: 'lessons',
+      as: 'discussions',
     });
     Courses.hasMany(models.progresses, {
       foreignKey: {
@@ -47,12 +50,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       as: 'progresses',
     });
-    Courses.hasMany(models.discussions, {
+    Courses.hasMany(models.lessons, {
       foreignKey: {
         name: 'courseIdKey',
         field: 'course_id',
       },
-      as: 'discussions',
+      as: 'lessons',
+    });
+    Courses.hasMany(models.transactions, {
+      foreignKey: {
+        name: 'courseIdKey',
+        field: 'course_id',
+      },
+      as: 'transactions',
     });
   };
 

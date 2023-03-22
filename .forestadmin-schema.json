@@ -104,6 +104,21 @@
       "relationship": "HasMany",
       "validations": []
     }, {
+      "field": "price",
+      "type": "Number",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "progresses",
       "type": ["Number"],
       "defaultValue": null,
@@ -134,9 +149,48 @@
       "reference": null,
       "inverseOf": null,
       "validations": []
+    }, {
+      "field": "transactions",
+      "type": ["Number"],
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": "transactions.transaction_id",
+      "inverseOf": "course",
+      "relationship": "HasMany",
+      "validations": []
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "Change instructor",
+      "type": "single",
+      "baseUrl": null,
+      "endpoint": "/forest/actions/change-instructor",
+      "httpMethod": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [{
+        "field": "New instructor",
+        "type": "String",
+        "defaultValue": null,
+        "enums": null,
+        "isRequired": true,
+        "reference": "user.fullname",
+        "description": null,
+        "position": 0,
+        "widget": null
+      }],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }]
   }, {
     "name": "discussions",
     "nameOld": "discussions",
@@ -223,6 +277,21 @@
     "onlyForRelationships": false,
     "paginationType": "page",
     "fields": [{
+      "field": "completedAt",
+      "type": "Date",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "course",
       "type": "Number",
       "defaultValue": null,
@@ -237,6 +306,36 @@
       "reference": "courses.id",
       "inverseOf": "enrollments",
       "relationship": "BelongsTo",
+      "validations": []
+    }, {
+      "field": "droppedAt",
+      "type": "Date",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "enrolledAt",
+      "type": "Date",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
       "validations": []
     }, {
       "field": "id",
@@ -320,6 +419,44 @@
     }, {
       "field": "description",
       "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "difficulty",
+      "type": "Enum",
+      "defaultValue": "beginner",
+      "enums": [
+        "beginner",
+        "intermediate",
+        "expert"
+      ],
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "duration",
+      "type": "Number",
       "defaultValue": null,
       "enums": null,
       "integration": null,
@@ -551,6 +688,146 @@
     "segments": [],
     "actions": []
   }, {
+    "name": "transactions",
+    "nameOld": "transactions",
+    "icon": null,
+    "integration": null,
+    "isReadOnly": false,
+    "isSearchable": true,
+    "isVirtual": false,
+    "onlyForRelationships": false,
+    "paginationType": "page",
+    "fields": [{
+      "field": "course",
+      "type": "Number",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": "courses.id",
+      "inverseOf": "transactions",
+      "relationship": "BelongsTo",
+      "validations": []
+    }, {
+      "field": "paymentMethod",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "purchaseAmount",
+      "type": "Number",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "purchaseDate",
+      "type": "Date",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "transactionId",
+      "type": "Number",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": true,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "transactionStatus",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "user",
+      "type": "Number",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": "users.id",
+      "inverseOf": "transactions",
+      "relationship": "BelongsTo",
+      "validations": []
+    }],
+    "segments": [],
+    "actions": []
+  }, {
     "name": "users",
     "nameOld": "users",
     "icon": null,
@@ -561,6 +838,36 @@
     "onlyForRelationships": false,
     "paginationType": "page",
     "fields": [{
+      "field": "avatar",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "createdAt",
+      "type": "Date",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "discussions",
       "type": ["Number"],
       "defaultValue": null,
@@ -608,6 +915,36 @@
       "relationship": "HasMany",
       "validations": []
     }, {
+      "field": "firstname",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "fullname",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": false,
+      "isPrimaryKey": false,
+      "isReadOnly": true,
+      "isRequired": false,
+      "isSortable": false,
+      "isVirtual": true,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "id",
       "type": "Number",
       "defaultValue": null,
@@ -639,7 +976,7 @@
       "relationship": "HasMany",
       "validations": []
     }, {
-      "field": "name",
+      "field": "lastname",
       "type": "String",
       "defaultValue": null,
       "enums": null,
@@ -703,17 +1040,72 @@
       "reference": null,
       "inverseOf": null,
       "validations": []
+    }, {
+      "field": "transactions",
+      "type": ["Number"],
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": "transactions.transaction_id",
+      "inverseOf": "user",
+      "relationship": "HasMany",
+      "validations": []
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "New enrollment",
+      "type": "single",
+      "baseUrl": null,
+      "endpoint": "/forest/actions/new-enrollment",
+      "httpMethod": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [{
+        "field": "student name",
+        "type": "String",
+        "defaultValue": null,
+        "enums": null,
+        "isRequired": false,
+        "isReadOnly": true,
+        "reference": "users.email",
+        "description": null,
+        "position": 0,
+        "widget": null
+      }, {
+        "field": "course",
+        "type": "Enum",
+        "defaultValue": null,
+        "enums": [
+          "Introduction to Python Programming",
+          "Web Development with HTML and CSS",
+          "Introduction to Machine Learning",
+          "Database Systems"
+        ],
+        "isRequired": false,
+        "reference": null,
+        "description": null,
+        "position": 1,
+        "widget": null
+      }],
+      "hooks": {
+        "load": true,
+        "change": []
+      }
+    }]
   }],
   "meta": {
     "liana": "forest-express-sequelize",
-    "liana_version": "8.5.14",
+    "liana_version": "9.2.9",
     "stack": {
       "database_type": "postgres",
       "engine": "nodejs",
-      "engine_version": "16.14.0",
+      "engine_version": "19.6.0",
       "orm_version": "5.15.2"
     }
   }

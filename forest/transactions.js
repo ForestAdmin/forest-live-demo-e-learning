@@ -5,17 +5,8 @@ const { collection } = require('forest-express-sequelize');
 // - Smart fields: https://docs.forestadmin.com/documentation/reference-guide/fields/create-and-manage-smart-fields
 // - Smart relationships: https://docs.forestadmin.com/documentation/reference-guide/relationships/create-a-smart-relationship
 // - Smart segments: https://docs.forestadmin.com/documentation/reference-guide/segments/smart-segments
-collection('courses', {
-  actions: [{ 
-    name: 'Change instructor',
-    type: 'single',
-    fields: [{
-      field: 'New instructor',
-      type: 'String',
-      isRequired: true,
-      reference: 'user.fullname'
-    }]
-  }],
+collection('transactions', {
+  actions: [],
   fields: [],
   segments: [],
   

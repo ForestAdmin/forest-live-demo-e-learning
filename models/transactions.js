@@ -4,51 +4,53 @@ module.exports = (sequelize, DataTypes) => {
   const { Sequelize } = sequelize;
   // This section contains the fields of your model, mapped to your table's columns.
   // Learn more here: https://docs.forestadmin.com/documentation/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
-  const Enrollments = sequelize.define('enrollments', {
-    status: {
-      type: DataTypes.ENUM(
-        'enrolled',
-        'completed',
-        'dropped',
-      ),
+  const Transactions = sequelize.define('transactions', {
+    transactionId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      defaultValue: Sequelize.literal('nextval(\'transactions_transaction_id_seq\'::regclass)'),
+      allowNull: false,
     },
-    enrolledAt: {
+    purchaseDate: {
       type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('now()'),
+      allowNull: false,
     },
-    completedAt: {
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('now()'),
+    purchaseAmount: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
     },
-    droppedAt: {
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('now()'),
+    paymentMethod: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    transactionStatus: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   }, {
-    tableName: 'enrollments',
+    tableName: 'transactions',
     underscored: true,
     timestamps: false,
     schema: process.env.DATABASE_SCHEMA,
   });
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/reference-guide/relationships#adding-relationships.
-  Enrollments.associate = (models) => {
-    Enrollments.belongsTo(models.courses, {
+  Transactions.associate = (models) => {
+    Transactions.belongsTo(models.courses, {
       foreignKey: {
         name: 'courseIdKey',
         field: 'course_id',
       },
       as: 'course',
     });
-    Enrollments.belongsTo(models.users, {
+    Transactions.belongsTo(models.users, {
       foreignKey: {
         name: 'userIdKey',
         field: 'user_id',
       },
       as: 'user',
     });
-    
   };
 
-  return Enrollments;
+  return Transactions;
 };

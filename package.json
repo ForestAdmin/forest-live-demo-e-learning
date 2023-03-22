@@ -4,11 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./server.js",
-    "start:dev": "nodemon ./server.js",
-    "db:seed": "docker exec -i forest_database_elearning psql -U forest elearning < seed.sql",
-    "db:drop": "docker exec -it forest_database_elearning psql -U forest postgres -c 'DROP DATABASE IF EXISTS elearning'",
-    "db:create": "docker exec -it forest_database_elearning psql -U forest postgres -c 'CREATE DATABASE elearning'",
-    "db:reset": "npm run db:drop && npm run db:create && npm run db:seed"
+    "start:dev": "nodemon ./server.js"
   },
   "dependencies": {
     "body-parser": "1.19.0",
@@ -19,9 +15,9 @@
     "dotenv": "~6.1.0",
     "express": "~4.17.1",
     "express-jwt": "6.1.2",
-    "forest-express-sequelize": "^8.0.0",
+    "forest-express-sequelize": "^9.2.9",
     "morgan": "1.9.1",
-    "pg": "~8.2.2",
+    "pg": "^8.9.0",
     "require-all": "^3.0.0",
     "sequelize": "~5.15.1"
   },

@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
+    difficulty: {
+      type: DataTypes.ENUM(
+        'beginner',
+        'intermediate',
+        'expert',
+      ),
+      defaultValue: "beginner",
+      allowNull: false,
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+    },
   }, {
     tableName: 'lessons',
     timestamps: false,

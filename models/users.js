@@ -5,9 +5,6 @@ module.exports = (sequelize, DataTypes) => {
   // This section contains the fields of your model, mapped to your table's columns.
   // Learn more here: https://docs.forestadmin.com/documentation/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
   const Users = sequelize.define('users', {
-    name: {
-      type: DataTypes.STRING,
-    },
     email: {
       type: DataTypes.STRING,
     },
@@ -21,8 +18,22 @@ module.exports = (sequelize, DataTypes) => {
         'administrator',
       ),
     },
+    avatar: {
+      type: DataTypes.STRING,
+    },
+    firstname: {
+      type: DataTypes.STRING,
+    },
+    lastname: {
+      type: DataTypes.STRING,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    },
   }, {
     tableName: 'users',
+    underscored: true,
     timestamps: false,
     schema: process.env.DATABASE_SCHEMA,
   });
@@ -43,6 +54,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       as: 'enrollments',
     });
+    Users.hasMany(models.discussions, {
+      foreignKey: {
+        name: 'userIdKey',
+        field: 'user_id',
+      },
+      as: 'discussions',
+    });
     Users.hasMany(models.progresses, {
       foreignKey: {
         name: 'userIdKey',
@@ -50,12 +68,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       as: 'progresses',
     });
-    Users.hasMany(models.discussions, {
+    Users.hasMany(models.transactions, {
       foreignKey: {
         name: 'userIdKey',
         field: 'user_id',
       },
-      as: 'discussions',
+      as: 'transactions',
     });
   };
 
